@@ -1,0 +1,9 @@
+[server]
+headless = true
+address = "0.0.0.0"
+maxUploadSize = 500
+maxMessageSize = 500
+runOnSave = false
+
+[browser]
+gatherUsageStats = false

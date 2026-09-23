@@ -5,6 +5,7 @@ HireLens is a college innovation project that ranks resumes against a job descri
 ## Must-have features
 
 - Upload multiple PDF and DOCX resumes at once
+- Scan public PDF, DOCX, portfolio, and resume webpage links
 - Paste or upload a PDF/DOCX job description
 - Extract skills from resumes and the job description
 - Score and rank candidates
@@ -13,11 +14,10 @@ HireLens is a college innovation project that ranks resumes against a job descri
 
 ## Additional features
 
-- Score breakdown: skill score versus TF-IDF text similarity
+- Score breakdown: skill score versus AI semantic similarity, with TF-IDF fallback
 - Name/file, email, and phone extraction where available
 - Minimum-score filter
 - Delete-all-data control for the current session
-- Five built-in demo candidates so the app works without resume files
 - Clear message for empty or scanned-image PDFs
 
 ## Project structure
@@ -48,11 +48,15 @@ streamlit run app.py
 
 Open the URL shown by Streamlit, usually http://localhost:8501.
 
+## Deploy on Render
+
+This repository includes `render.yaml`. Create a Render Web Service from the repository and use the generated service configuration. The service binds Streamlit to Render's `$PORT` and starts with an empty screening session.
+
 ## Scoring
 
 ```text
 skill_score = matched JD skills / total JD skills
-text_score = TF-IDF cosine similarity between JD and resume text
+text_score = AI semantic similarity between JD and resume text, with TF-IDF fallback
 final_score = 0.7 * skill_score + 0.3 * text_score
 ```
 
