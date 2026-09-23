@@ -131,7 +131,7 @@ with left:
     uploads = st.file_uploader('Upload multiple PDF or DOCX resumes', type=['pdf', 'docx'], accept_multiple_files=True)
     if uploads:
         st.caption(f'{len(uploads)} resume file(s) selected')
-    resume_links = st.text_area('Resume website links (one per line)', value='', height=88, placeholder='https://example.com/resume.pdf\nhttps://portfolio.example.com', help='Optional: paste public PDF, DOCX, portfolio, or resume webpage links.')
+    resume_links = st.text_area('Or add resume website links (one per line)', value='', height=88, placeholder='Paste public resume or portfolio links here', help='Optional alternative to file upload: add public PDF, DOCX, portfolio, or resume webpage links.')
 with right:
     st.markdown('<div class="step-card"><div class="step-label">Step 02</div><div class="step-title">Job skills detected</div></div>', unsafe_allow_html=True)
     st.markdown(f'<div class="skill-wrap">{chips(extract_skills(job_text), "matched")}</div>', unsafe_allow_html=True)
