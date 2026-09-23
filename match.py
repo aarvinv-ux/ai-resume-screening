@@ -6,6 +6,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 @lru_cache(maxsize=1)
 def _embedding_model():
+    if os.getenv("HIRELENS_ENABLE_EMBEDDINGS", "false").lower() != "true":
+        return None
     try:
         from sentence_transformers import SentenceTransformer
         return SentenceTransformer("all-MiniLM-L6-v2")

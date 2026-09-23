@@ -117,7 +117,7 @@ with st.sidebar:
             st.error(str(error))
     st.session_state.job = job_text
     minimum = st.slider('Minimum score', 0, 100, 0)
-    use_ai = st.checkbox('Use AI semantic matching', value=False, help='Uses an embedding model and may take longer the first time. Fast skill and TF-IDF matching remains available by default.')
+    use_ai = st.checkbox('Use AI semantic matching', value=False, help='Uses embeddings only when enabled by the deployment. Otherwise it falls back immediately to fast local matching.')
     if st.button('Delete all screening data', use_container_width=True):
         st.session_state.results = []
         st.success('Session data deleted.')
@@ -148,6 +148,8 @@ if st.button('Rank candidates', type='primary', use_container_width=True):
         mode = 'AI' if use_ai else 'fast'
         with st.spinner(f'Analyzing {total_sources} resume(s) in {mode} mode...'):
             st.session_state.results, _ = rank(job_text, uploads, link_list, use_ai)
+        if use_ai and total_sources <= 75 and all(item['similarity_method'] != 'AI semantic similarity' for item in st.session_state.results):
+            st.info('AI embeddings are not enabled on this deployment, so fast local matching was used.')
 
 results = [item for item in st.session_state.results if item['score'] >= minimum]
 if results:
