@@ -55,7 +55,7 @@ st.markdown('''<style>
 if 'results' not in st.session_state: st.session_state.results=[]
 if 'job' not in st.session_state: st.session_state.job=DEFAULT_JD
 with st.sidebar:
-    st.markdown('## H HireLens')
+    st.markdown('## HireLens')
     st.caption('Explainable resume screening')
     job_text=st.text_area('Job description',st.session_state.job,height=220)
     job_file=st.file_uploader('Or upload a JD',type=['pdf','docx'])
