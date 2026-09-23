@@ -49,7 +49,7 @@ def export_xlsx(results):
 
 st.markdown('''<style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap');
-.stApp{background:#f4f6f1;color:#17251f}.block-container{max-width:1150px;padding-top:2rem}h1,h2,h3{font-family:'Space Grotesk'}.hero{background:#17342b;color:#e5f2e9;padding:2rem;border-radius:12px;margin-bottom:1.3rem}.hero h1{color:white;margin:0}.metric{background:white;border:1px solid #dce4dc;border-radius:9px;padding:1rem}.metric b{display:block;font:700 1.8rem 'Space Grotesk';color:#27735c}.metric span{font-size:.75rem;color:#718078}.chip{display:inline-block;padding:.3rem .5rem;border-radius:4px;margin:.15rem;font-size:.75rem}.matched{color:#216348;background:#e6f0e9}.missing{color:#914641;background:#f8e8e5}.candidate{background:white;border:1px solid #dce4dc;border-radius:9px;padding:1.2rem;margin:1rem 0}.score{font:700 2rem 'Space Grotesk';color:#27735c}.disclaimer{color:#89968e;font-size:.72rem;text-align:center}
+.stApp{background:#f4f6f1;color:#17251f}.block-container{max-width:1180px;padding-top:2.3rem}h1,h2,h3{font-family:'Space Grotesk';letter-spacing:-.6px}.hero{background:#f4f6f1;padding:.2rem 0 1.35rem;border-radius:0;margin-bottom:1rem}.hero h1{color:#17251f;font-size:2.8rem;margin-bottom:.2rem}.hero p{color:#718078;font-size:1rem}.stSidebar{background:#17342b}.stSidebar>div:first-child{background:#17342b}.stSidebar *{color:#dcece2}.stSidebar textarea{background:#234a3c;border-color:#557a6a;color:#fff}.stSidebar label{color:#dcece2}.stButton>button{border-radius:7px;border-color:#27735c}.stButton>button[kind="primary"]{background:#27735c;color:#fff;border-color:#27735c}.stFileUploader{background:#fff;border:1px solid #dce4dc;border-radius:10px;padding:.8rem}.metric{background:white;border:1px solid #dce4dc;border-radius:9px;padding:1rem}.metric b{display:block;font:700 1.8rem 'Space Grotesk';color:#27735c}.metric span{font-size:.75rem;color:#718078}.chip{display:inline-block;padding:.3rem .5rem;border-radius:4px;margin:.15rem;font-size:.75rem}.matched{color:#216348;background:#e6f0e9}.missing{color:#914641;background:#f8e8e5}.candidate{background:white;border:1px solid #dce4dc;border-radius:9px;padding:1.2rem;margin:1rem 0}.score{font:700 2rem 'Space Grotesk';color:#27735c}.disclaimer{color:#89968e;font-size:.72rem;text-align:center}
 </style>''',unsafe_allow_html=True)
 
 if 'results' not in st.session_state: st.session_state.results=[]
@@ -66,7 +66,7 @@ with st.sidebar:
     minimum=st.slider('Minimum score',0,100,0)
     if st.button('Delete all screening data',use_container_width=True): st.session_state.results=[]; st.success('Session data deleted.')
 
-st.markdown('<div class="hero"><h1>HireLens</h1><p>Rank resumes against a job description with transparent, job-relevant evidence.</p></div>',unsafe_allow_html=True)
+st.markdown('<div class="hero"><p class="eyebrow">CANDIDATE INTELLIGENCE</p><h1>Screen with clarity.</h1><p>Rank resumes against a job description with transparent, job-relevant evidence.</p></div>',unsafe_allow_html=True)
 left,right=st.columns([1.4,1])
 with left: uploads=st.file_uploader('Upload multiple PDF or DOCX resumes',type=['pdf','docx'],accept_multiple_files=True)
 with right: st.markdown('### Job skills detected'); st.markdown(chips(extract_skills(job_text),'matched'),unsafe_allow_html=True)
