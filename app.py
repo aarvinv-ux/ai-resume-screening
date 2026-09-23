@@ -14,7 +14,7 @@ def chips(values, style):
     return ' '.join(f'<span class="chip {style}">{v}</span>' for v in values) or '<span class="empty">None</span>'
 
 
-def rank(job_text, uploads, urls=None):
+def rank(job_text, uploads, urls=None, use_ai=False):
     job_skills = extract_skills(job_text)
     candidates = []
     for file in uploads or []:
@@ -36,7 +36,8 @@ def rank(job_text, uploads, urls=None):
             candidates.append({'Candidate': extract_name(text, fallback_name), 'Email': contact['email'], 'File': url, '_skills': extract_skills(text), '_text': text[:12000]})
         except Exception as error:
             st.warning(f'{url}: {error}')
-    scores = score_resumes(job_text, [(item['_text'], item['_skills']) for item in candidates], job_skills)
+    safe_for_ai = use_ai and len(candidates) <= 75
+    scores = score_resumes(job_text, [(item['_text'], item['_skills']) for item in candidates], job_skills, allow_ai=safe_for_ai)
     results = []
     for candidate, score in zip(candidates, scores):
         candidate.pop('_skills', None)
@@ -116,6 +117,7 @@ with st.sidebar:
             st.error(str(error))
     st.session_state.job = job_text
     minimum = st.slider('Minimum score', 0, 100, 0)
+    use_ai = st.checkbox('Use AI semantic matching', value=False, help='Uses an embedding model and may take longer the first time. Fast skill and TF-IDF matching remains available by default.')
     if st.button('Delete all screening data', use_container_width=True):
         st.session_state.results = []
         st.success('Session data deleted.')
@@ -143,8 +145,9 @@ if st.button('Rank candidates', type='primary', use_container_width=True):
     else:
         link_list = [line.strip() for line in resume_links.splitlines() if line.strip()]
         total_sources = len(uploads or []) + len(link_list)
-        with st.spinner(f'Analyzing {total_sources} resume(s) with AI...'):
-            st.session_state.results, _ = rank(job_text, uploads, link_list)
+        mode = 'AI' if use_ai else 'fast'
+        with st.spinner(f'Analyzing {total_sources} resume(s) in {mode} mode...'):
+            st.session_state.results, _ = rank(job_text, uploads, link_list, use_ai)
 
 results = [item for item in st.session_state.results if item['score'] >= minimum]
 if results:
