@@ -48,6 +48,8 @@ streamlit run app.py
 
 Open the URL shown by Streamlit, usually http://localhost:8501.
 
+The Render deployment uses the lightweight requirements file. For optional local or paid-instance embedding support, install `requirements-ai.txt` and set `HIRELENS_ENABLE_EMBEDDINGS=true`. The app falls back to fast local matching when embeddings are unavailable.
+
 ## Deploy on Render
 
 This repository includes `render.yaml`. Create a Render Web Service from the repository and use the generated service configuration. The service binds Streamlit to Render's `$PORT` and starts with an empty screening session.
