@@ -1,0 +1,10 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.streamlit/
+backend/data/*.db
+backend/uploads/*
+backend/uploads/.gitkeep
+*.xlsx
+.DS_Store

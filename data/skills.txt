@@ -1,0 +1,51 @@
+python
+javascript
+typescript
+java
+c++
+c#
+react
+angular
+vue
+html
+css
+sql
+postgresql
+mysql
+mongodb
+node.js
+fastapi
+django
+flask
+streamlit
+machine learning
+deep learning
+artificial intelligence
+natural language processing
+computer vision
+data analysis
+data visualization
+pandas
+numpy
+scikit-learn
+tensorflow
+pytorch
+excel
+power bi
+tableau
+aws
+azure
+gcp
+docker
+kubernetes
+git
+github
+rest api
+graphql
+pytest
+selenium
+figma
+ui design
+project management
+communication
+leadership
